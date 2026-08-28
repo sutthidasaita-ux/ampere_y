@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For กิ๊ก 🤎✨</title>
+    <!-- รูปพรีวิวลิงก์ในแชทเป็นรูปแมวกอดกันสุดน่ารัก -->
+    <meta property="og:title" content="💌 มีจดหมายพิเศษส่งถึงเธอ...">
+    <meta property="og:description" content="คลิกเพื่อเปิดดูข้อความข้างในเลย 🤎✨">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?w=800&auto=format&fit=crop&q=80">
+    <style>
+        body {
+            /* พื้นหลังสีครีมลายจุด Polka Dot สุดละมุน */
+            background-color: #fcf9f2;
+            background-image: radial-gradient(#dfcbb7 18%, transparent 19%);
+            background-size: 28px 28px;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Tahoma', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* หัวใจและดาวลอยกระจายบนพื้นหลัง */
+        .bg-element {
+            position: absolute;
+            font-size: 20px;
+            animation: floatComplex 5s linear infinite;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatComplex {
+            0% { transform: translateY(105vh) scale(0.6) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.3) rotate(360deg); opacity: 0; }
+        }
+
+        /* กล่องซองจดหมายตอนเริ่มต้น มีลูกเล่นขยับดุ๊กดิ๊ก */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+            z-index: 2;
+            animation: pulseEnvelope 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulseEnvelope {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.03) translateY(-6px); }
+        }
+
+        /* คำว่า "เปิดเลย" ด้านบนซอง */
+        .open-title {
+            color: #5c3a21;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            animation: bounce 1.5s infinite;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.08);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ตัวซองจดหมายสีน้ำตาลลายดาวทอง */
+        .envelope {
+            position: relative;
+            width: 310px;
+            height: 200px;
+            background: #8b5a2b;
+            border-radius: 0 0 14px 14px;
+            box-shadow: 0 25px 50px rgba(139, 90, 43, 0.35),
+                        inset 0 0 20px rgba(0,0,0,0.15);
+            background-image: 
+                radial-gradient(#ffd700 15%, transparent 16%),
+                radial-gradient(#ffd700 15%, transparent 16%);
+            background-size: 35px 35px;
+            background-position: 0 0, 17px 17px;
+            border: 2px solid #5c3a21;
+        }
+
+        /* ฝาซองจดหมายด้านบน */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 155px solid transparent;
+            border-right: 155px solid transparent;
+            border-top: 110px solid #6b4423;
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 4;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+        }
+
+        /* ตัวกระดาษจดหมายที่แอบโผล่ขึ้นมาตอนคลิกเปิด */
+        .letter-peek {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 140px;
+            background: #ffffff;
+            border-radius: 10px;
+            transition: transform 0.6s ease;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border: 1px dashed #d4a373;
+        }
+
+        /* ตัวกระเป๋าซองด้านหน้า */
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 155px solid #7d5025;
+            border-right: 155px solid #7d5025;
+            border-bottom: 105px solid #8b5a2b;
+            border-radius: 0 0 14px 14px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* --- หน้าการ์ดข้อความด้านใน --- */
+        .letter-card {
+            display: none;
+            background: #fffdf9;
+            padding: 40px 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12),
+                        inset 0 0 15px rgba(212, 163, 115, 0.15);
+            text-align: center;
+            max-width: 320px;
+            width: 85%;
+            position: relative;
+            z-index: 2;
+            border: 3px double #d4a373;
+            animation: cardAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes cardAppear {
+            0% { transform: scale(0.3) translateY(50px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .letter-card h2 {
+            color: #6b4423;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px dashed #d4a373;
+            padding-bottom: 10px;
+        }
+
+        .letter-card p {
+            color: #8b5a2b;
+            font-size: 26px;
+            font-weight: bold;
+            line-height: 1.4;
+            margin: 25px 0;
+            animation: pulseText 1.5s infinite;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        @keyframes pulseText {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .letter-signature {
+            color: #b08968;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 25px;
+            border-top: 1px dashed #d4a373;
+            padding-top: 10px;
+        }
+
+        /* หัวใจและดาวลอยตอนเปิดซอง */
+        .pop-element {
+            position: absolute;
+            font-size: 26px;
+            animation: floatHeart 2.2s ease-in-out forwards;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(0.4) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-200px) scale(1.6) rotate(60deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- พื้นหลังหัวใจและดาวลอย -->
+    <script>
+        function createBackgroundElement() {
+            const el = document.createElement('div');
+            el.classList.add('bg-element');
+            const symbols = ['🤎', '💖', '⭐', '✨'];
+            el.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            el.style.fontSize = (Math.random() * 12 + 16) + 'px';
+            
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.remove();
+            }, 7000);
+        }
+        setInterval(createBackgroundElement, 250);
+    </script>
+
+    <!-- ซองจดหมายดีไซน์สวยงาม -->
+    <div class="envelope-wrapper" id="envelopeBox" onclick="openEnvelope()">
+        <div class="open-title">เปิดเลย</div>
+        <div class="envelope">
+            <div class="letter-peek" id="letterPeek"></div>
+            <div class="envelope-flap" id="envFlap"></div>
+            <div class="envelope-pocket"></div>
+        </div>
+    </div>
+
+    <!-- หน้าการ์ดข้อความด้านใน (กิ๊ก + รักที่สุดในโลก) -->
+    <div class="letter-card" id="letterCard">
+        <h2>✨ ถึง กิ๊ก 🤎 ✨</h2>
+        <p>รักที่สุดในโลก !</p>
+        <div class="letter-signature">
+            จากคนน่ารักเเละสวยมาก 😎✨
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            const envFlap = document.getElementById('envFlap');
+            const letterPeek = document.getElementById('letterPeek');
+            
+            letterPeek.style.transform = 'translateY(-60px)';
+            envFlap.style.transform = 'rotateX(180deg)';
+            
+            for (let i = 0; i < 30; i++) {
+                createPopElement();
+            }
+
+            setTimeout(() => {
+                document.getElementById('envelopeBox').style.display = 'none';
+                document.getElementById('letterCard').style.display = 'block';
+            }, 600);
+        }
+
+        function createPopElement() {
+            const el = document.createElement('div');
+            el.classList.add('pop-element');
+            const symbols = ['🤎', '✨', '⭐', '💖'];
+            el.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            const x = (Math.random() - 0.5) * 300;
+            const y = (Math.random() - 0.5) * 140;
+            
+            el.style.left = `calc(50% + ${x}px)`;
+            el.style.top = `calc(50% + ${y}px)`;
+            
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.remove();
+            }, 2200);
+        }
+    </script>
+
+</body>
+</html>
